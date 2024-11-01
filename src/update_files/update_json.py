@@ -1,5 +1,6 @@
 import json
 import os
+from typing import Any, Dict, List
 
 from paths import ROOT_PATH, VACANCIES_JSON_PATH
 from src.update_files.update_file import UpdateFile
@@ -9,7 +10,7 @@ from src.vacancy.vacancy import Vacancy
 class UpdateJSON(UpdateFile):
     """Класс для работы с JSON-файлами"""
 
-    def __init__(self, file_name=VACANCIES_JSON_PATH):
+    def __init__(self, file_name: str = VACANCIES_JSON_PATH) -> None:
         """Конструктор"""
         if file_name != VACANCIES_JSON_PATH:
             if not file_name.endswith(".json"):
@@ -21,7 +22,7 @@ class UpdateJSON(UpdateFile):
 
         self._file_path = file_name
 
-    def add_vacancy(self, vacancy):
+    def add_vacancy(self, vacancy: Vacancy) -> None:
         """Добавляет вакансию в файл"""
 
         vacancy_json = {
@@ -49,7 +50,7 @@ class UpdateJSON(UpdateFile):
             self._write_file(vacancies_data)
             print(vacancy_added)
 
-    def delete_vacancy(self, vacancy):
+    def delete_vacancy(self, vacancy: Vacancy) -> None:
         """Метод для удаления вакансии из файла"""
         vacancy_name = vacancy.name if len(vacancy.name) < 50 else vacancy.name[:50] + "..."
         vacancies_data = self._read_file()
@@ -63,7 +64,7 @@ class UpdateJSON(UpdateFile):
 
         print(f"Вакансии '{vacancy_name}' нет в файле: {self._file_path}")
 
-    def get_vacancies(self, with_print=True):
+    def get_vacancies(self, with_print: bool = True) -> Any:
         """Метод для получения вакансий из файла"""
         vacancies = self._read_file()
         if vacancies:
@@ -76,7 +77,7 @@ class UpdateJSON(UpdateFile):
 
         return vacancies
 
-    def _read_file(self):
+    def _read_file(self) -> Any:
         """Метод для чтения файлов"""
         try:
             with open(self._file_path, "r", encoding="utf-8") as file:
@@ -84,13 +85,13 @@ class UpdateJSON(UpdateFile):
         except FileNotFoundError:
             return []
 
-    def _write_file(self, vacancies_data):
+    def _write_file(self, vacancies_data: List[Dict]) -> None:
         """Метод для записи информации о вакансии в файл"""
         with open(self._file_path, "w", encoding="utf-8") as file:
             json.dump(vacancies_data, file, ensure_ascii=False, indent=4)
 
     @staticmethod
-    def print_vacancies(vacancies_data):
+    def print_vacancies(vacancies_data: List[Dict]) -> None:
         """Метод для вывода информации о вакансии"""
         number_vacancy = 1
         for vacancy_data in vacancies_data:
@@ -104,6 +105,6 @@ class UpdateJSON(UpdateFile):
             number_vacancy += 1
 
     @property
-    def file_path(self):
+    def file_path(self) -> str:
         """Геттер для получения пути к файлу"""
         return self._file_path

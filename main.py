@@ -1,9 +1,5 @@
-import os
-
-from paths import ROOT_PATH
 from src.get_api.api_hh import HH
 from src.utils.utils import get_top_vacancies, create_list_of_vacancies, initialization_menu, search_menu
-from src.vacancy.vacancy import Vacancy
 
 
 def user_interaction():
@@ -16,11 +12,13 @@ def user_interaction():
     vacancies_list = create_list_of_vacancies(vacancies_data)
 
     while True:
-        choice = input("==========\n\n"
-                       "Показать и сохранить:\n"
-                       "1 - Все найденные вакансии\n"
-                       "2 - Топ вакансий по размеру заработной платы\n"
-                       "Введите число: ").strip()
+        choice = input(
+            "==========\n\n"
+            "Показать и сохранить:\n"
+            "1 - Все найденные вакансии\n"
+            "2 - Топ вакансий по размеру заработной платы\n"
+            "Введите число: "
+        ).strip()
 
         if choice == "1":
             break
@@ -38,4 +36,3 @@ def user_interaction():
 
 if __name__ == "__main__":
     user_interaction()
-

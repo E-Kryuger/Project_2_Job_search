@@ -1,4 +1,5 @@
 import re
+from typing import Dict, List, Optional
 
 import requests
 
@@ -16,7 +17,7 @@ DEFAULT_AREA_URL = "https://api.hh.ru/areas/113"
 class HH(GetVacanciesAPI):
     """Класс для работы с API HH.ru"""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Конструктор для инициализации объекта, работающего с API"""
         self.__url = API_URL
         self.__headers = HEADERS
@@ -29,7 +30,7 @@ class HH(GetVacanciesAPI):
         }
         self.__vacancies = []
 
-    def _connect_to_api(self):
+    def _connect_to_api(self) -> Optional[requests.Response]:
         """Подключение к API и проверка успешности подключения"""
         try:
             response = requests.get(url=self.__url, headers=self.__headers)
@@ -40,7 +41,7 @@ class HH(GetVacanciesAPI):
         else:
             return response
 
-    def get_vacancies(self, keyword, city_name="", with_salary=True):
+    def get_vacancies(self, keyword: str, city_name: str = "", with_salary: bool = True) -> List[Dict]:
         """Получение вакансий по ключевому слову и городу(опционально)"""
         if not self._connect_to_api():
             return []  # Возврат пустого списка в случае ошибки подключения
