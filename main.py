@@ -1,5 +1,5 @@
 from src.get_api.api_hh import HH
-from src.utils.utils import get_top_vacancies, create_list_of_vacancies, initialization_menu, search_menu
+from src.utils.utils import create_list_of_vacancies, get_top_vacancies, initialization_menu, search_menu
 
 
 def user_interaction():

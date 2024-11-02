@@ -38,17 +38,17 @@ class Vacancy:
         return True
 
     def __lt__(self, other):
-        """Дандер для сравнения вакансий по зарплате"""
+        """Сравнивает вакансии по зарплате"""
         self._validate_other(other)
         return self._avg_salary() < other._avg_salary()
 
     def __str__(self):
-        """Дандер для строкового представления вакансии"""
+        """Возвращает строковое представление объекта вакансии"""
         return (
             f"Название вакансии: {self._name}\n"
             f"Ссылка на вакансию: {self._url}\n"
             f"Зарплата: {self.salary}\n"
-            f"Локация размещения вакансии: {self.city}\n"
+            f"Размещение вакансии: {self.city}\n"
             f"Требования: {self._requirements}"
         )
 

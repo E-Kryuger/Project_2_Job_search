@@ -6,7 +6,6 @@ import requests
 from src.get_api.get_vacancies_api import GetVacanciesAPI
 from src.utils.validator import SearchValidator
 
-
 # Константы
 API_URL = "https://api.hh.ru/vacancies"
 HEADERS = {"User-Agent": "HH-User-Agent"}

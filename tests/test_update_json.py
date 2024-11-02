@@ -1,4 +1,5 @@
 import os
+
 from src.update_files.update_json import ROOT_PATH, UpdateJSON
 
 

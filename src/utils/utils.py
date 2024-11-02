@@ -1,8 +1,9 @@
+from typing import Dict, List, Union
+
+from src.get_api.api_hh import HH
+from src.update_files.update_json import UpdateJSON
 from src.utils.validator import SalaryValidator
 from src.vacancy.vacancy import Vacancy
-from src.update_files.update_json import UpdateJSON
-from src.get_api.api_hh import HH
-from typing import List, Union, Dict
 
 
 def avg_salary(salary_str: str) -> Union[int, float]:

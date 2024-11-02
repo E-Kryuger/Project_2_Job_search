@@ -4,49 +4,32 @@ from typing import Any, Tuple, Union
 
 
 class Validator(ABC):
-    """Абстрактный класс для валидации данных вакансии."""
+    """Абстрактный класс для валидации данных вакансии"""
 
     @staticmethod
     @abstractmethod
     def validate(value: Any) -> Union[str, int, list, Tuple[int, int]]:
-        """
-        Абстрактный метод для валидации значения.
-
-        :param value: Значение, которое требуется валидировать.
-        :return: Валидированное значение.
-        """
+        """Абстрактный метод для валидации значения"""
         pass
 
 
 class NameValidator(Validator):
-    """Валидатор для названия вакансии."""
+    """Валидатор для названия вакансии"""
 
     @staticmethod
     def validate(value: str) -> str:
-        """
-        Проверяет, что название вакансии не пустое.
-
-        :param value: Название вакансии.
-        :exception ValueError: Если название вакансии пустое.
-        :return: Валидированное название вакансии.
-        """
+        """Проверяет, что название вакансии не пустое"""
         if not value:
             raise ValueError("Название вакансии не указано.")
         return value
 
 
 class URLValidator(Validator):
-    """Валидатор для URL вакансии."""
+    """Валидатор для URL вакансии"""
 
     @staticmethod
     def validate(value: str) -> str:
-        """
-        Проверяет, что URL вакансии не пустой и начинается с 'https://'.
-
-        :param value: URL вакансии.
-        :exception ValueError: Если URL не указан или не начинается с 'https://'.
-        :return: Валидированный URL вакансии.
-        """
+        """Проверяет, что URL вакансии не пустой и начинается с 'https://'"""
         if not value:
             raise ValueError("URL вакансии не указан.")
         if value.startswith("<") and value.endswith(">"):
@@ -57,32 +40,22 @@ class URLValidator(Validator):
 
 
 class RequirementsValidator(Validator):
-    """Валидатор для требований к вакансии."""
+    """Валидатор для требований к вакансии"""
 
     @staticmethod
     def validate(value: str) -> str:
-        """
-        Проверяет, что требования к вакансии указаны.
-
-        :param value: Требования к вакансии.
-        :return: Валидированные требования к вакансии.
-        """
+        """Проверяет, что требования к вакансии указаны"""
         if not value:
             return "Требования не указаны."
         return value
 
 
 class SalaryValidator(Validator):
-    """Валидатор для зарплаты вакансии."""
+    """Валидатор для зарплаты"""
 
     @staticmethod
     def validate(value: Union[str, int]) -> Union[Tuple[int, int], int]:
-        """
-        Проверяет корректность указания зарплаты.
-
-        :param value: Зарплата вакансии, указанная строкой или числом.
-        :return: Валидированная зарплата в виде числа или диапазона (картежа).
-        """
+        """Проверяет корректность указания зарплаты"""
         if not value:
             return 0
 
@@ -106,17 +79,12 @@ class SalaryValidator(Validator):
 
 
 class AreaNameValidator(Validator):
-    """Валидатор для названия города размещения вакансии."""
+    """Валидатор для названия города размещения вакансии"""
 
     @staticmethod
     def validate(value: str) -> str:
-        """
-        Проверяет, что название города размещения вакансии указано.
-        Если информация не указана, используется 'Россия'.
-
-        :param value: Название города.
-        :return: Валидированное название.
-        """
+        """Проверяет, что название города размещения вакансии указано.
+        Если информация не указана, используется 'Россия'"""
         if not value:
             return "Россия"
         return value
@@ -127,12 +95,7 @@ class SearchValidator(Validator):
 
     @staticmethod
     def validate(value: str) -> list:
-        """
-        Проверяет наличие названия города и возвращает название в виде списка.
-
-        :param value: Название города.
-        :return: Название в виде списка.
-        """
+        """Проверяет наличие названия города и возвращает название в виде списка"""
         parts_of_name = re.findall(r"\w+", value)
 
         if parts_of_name:

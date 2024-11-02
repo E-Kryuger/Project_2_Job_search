@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from src.utils.utils import get_top_vacancies, create_list_of_vacancies, get_salary
+from src.utils.utils import create_list_of_vacancies, get_salary, get_top_vacancies
 
 
 @patch("builtins.input", side_effect=["2"])
